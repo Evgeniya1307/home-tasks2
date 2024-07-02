@@ -1,49 +1,25 @@
-import React from 'react'
-import { AffairType } from '../../HW2'
-import s from './Affair.module.css'
-import s2 from '../Affairs.module.css'
+import React from 'react';
+import { AffairType } from '../../HW2';
+import s from './Affair.module.css';
 
+// 9. Дописываем типизацию пропсов
 type AffairPropsType = {
-    // key не нужно типизировать
-    affair: AffairType
-    deleteAffairCallback: any // need to fix any
+    affair: AffairType; // Определяем тип для пропса affair как AffairType
+    deleteAffairCallback: (_id: number) => void; // Определяем тип для пропса deleteAffairCallback как функцию, принимающую номер (_id)
 }
 
-function Affair(props: AffairPropsType) {
+const Affair: React.FC<AffairPropsType> = ({ affair, deleteAffairCallback }) => {
+    // 10. Дописываем функцию deleteCallback и используем её
     const deleteCallback = () => {
-        // need to fix
+        deleteAffairCallback(affair._id); // Вызов функции deleteAffairCallback с _id текущего дела (affair)
     }
 
-    const nameClass = s.name + ' ' + s2[props.affair.priority]
-    const buttonClass = s.closeButton + ' ' + s2[props.affair.priority]
-    const affairClass = s.affair + ' ' + s2[props.affair.priority]
-
     return (
-        <div
-            id={'hw2-affair-' + props.affair._id}
-            className={affairClass}
-        >
-            <div id={'hw2-name-' + props.affair._id} className={nameClass}>
-                {/*создаёт студент*/}
-
-                {/**/}
-            </div>
-            <div id={'hw2-priority-' + props.affair._id} hidden>
-                {props.affair.priority}
-            </div>
-
-            <button
-                id={'hw2-button-delete-' + props.affair._id}
-                className={buttonClass}
-                // need to fix
-
-            >
-                {/*текст кнопки могут изменить студенты*/}
-                X
-                {/**/}
-            </button>
+        <div className={`${s.affair} ${s[affair.priority]}`}> {/* Применяем стили в зависимости от приоритета дела */}
+            <span className={s.name}>{affair.name}</span> {/* Отображаем название дела */}
+            <button className={s.closeButton} onClick={deleteCallback}>X</button> {/* Кнопка для удаления дела */}
         </div>
-    )
+    );
 }
 
-export default Affair
+export default Affair;
