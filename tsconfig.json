@@ -18,9 +18,14 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "react-jsx",
+    "baseUrl": ".", // Убедитесь, что эта строка добавлена
+    "paths": {
+      "@/*": ["src/*"] // Убедитесь, что это правильно настроено
+    }
   },
   "include": [
-    "src"
+    "src",
+    "cypress" // Убедитесь, что папка cypress включена
   ]
 }
