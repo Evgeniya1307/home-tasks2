@@ -3,7 +3,7 @@ import Affair from './affair/Affair';
 import { AffairType, FilterType } from '../HW2';
 import s from './Affairs.module.css';
 
-// 7. Дописываем типизацию пропсов
+//  типизация пропсов
 type AffairsPropsType = {
     data: AffairType[];
     setFilter: (filter: FilterType) => void;
