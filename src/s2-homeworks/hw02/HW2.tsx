@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Affairs from './affairs/Affairs';
 import s2 from '../../s1-main/App.module.css';
 
-// 1. Описываем типы AffairPriorityType и AffairType
+// 1. типы AffairPriorityType и AffairType
 export type AffairPriorityType = 'high' | 'middle' | 'low';
 
 export type AffairType = {
@@ -12,7 +12,7 @@ export type AffairType = {
 }
 export type FilterType = 'all' | AffairPriorityType;
 
-// 2. Указываем нужный тип для defaultAffairs
+// 2.  нужный тип для defaultAffairs
 const defaultAffairs: AffairType[] = [
     {_id: 1, name: 'React', priority: 'high'},
     {_id: 2, name: 'anime', priority: 'low'},
@@ -60,3 +60,4 @@ function HW2() {
 }
 
 export default HW2;
+

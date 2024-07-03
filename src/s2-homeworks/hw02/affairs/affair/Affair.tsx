@@ -16,12 +16,11 @@ const Affair: React.FC<AffairPropsType> = ({ affair, deleteAffairCallback }) => 
 
     return (
         <div className={`${s.affair} ${s[affair.priority]}`} id={`hw2-affair-${affair._id}`}>
-            <span className={s.name} id={`hw2-priority-${affair.priority}`}>{affair.name}</span>
-            <button className={s.closeButton} onClick={deleteCallback}>X</button>
+            <span className={s.name} id={`hw2-name-${affair._id}`}>{affair.name}</span>
+            <span className={s.priority} id={`hw2-priority-${affair._id}`}>{affair.priority}</span>
+            <button className={s.closeButton} id={`hw2-button-delete-${affair._id}`} onClick={deleteCallback}>X</button>
         </div>
     );
 }
 
 export default Affair;
-
-
