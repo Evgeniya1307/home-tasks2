@@ -1,35 +1,87 @@
 .greetingForm {
+    /* Устанавливаем flex контейнер с колонной направлением */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .inputAndButtonContainer {
+    /* Устанавливаем flex контейнер для ввода и кнопки */
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 10px;
 }
 
 .error {
+    /* Стиль для сообщения об ошибке */
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
 }
 
 .input {
+    /* Основной стиль для ввода */
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
 }
 
 .input:focus {
+    /* Стиль для ввода при фокусе */
+    border-color: #007BFF;
 }
 
 .errorInput {
+    /* Стиль для ввода с ошибкой */
+    border-color: red;
 }
 
 .button {
+    /* Стиль для кнопки */
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
 }
 
 .button:focus {
+    /* Стиль для кнопки при фокусе */
+    outline: none;
 }
 
 .button:active {
+    /* Стиль для кнопки при нажатии */
+    background-color: #0056b3;
 }
 
 .button:disabled {
+    /* Стиль для отключенной кнопки */
+    background-color: #ccc;
+    cursor: not-allowed;
 }
 
 .text {
+    /* Стиль для текста */
+    margin-bottom: 10px;
+    font-size: 16px;
 }
 
 .greeting {
+    /* Стиль для приветствия */
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
 }
