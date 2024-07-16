@@ -1,17 +1,13 @@
-import React, {
-    ChangeEvent,
-    DetailedHTMLProps,
-    InputHTMLAttributes,
-} from 'react'
-import s from './SuperCheckbox.module.css'
+import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import s from './SuperCheckbox.module.css';
 
 // тип пропсов обычного инпута
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 type SuperCheckboxPropsType = Omit<DefaultInputPropsType, 'type'> & {
-    onChangeChecked?: (checked: boolean) => void
-    spanClassName?: string
-}
+    onChangeChecked?: (checked: boolean) => void;
+    spanClassName?: string;
+};
 
 const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
     {
@@ -25,15 +21,13 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
         ...restProps // все остальные пропсы попадут в объект restProps
     }
 ) => {
-    // Обработчик изменения состояния чекбокса
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange?.(e) // если есть пропс onChange, то передать ему е
+        onChange?.(e); // если есть пропс onChange, то передать ему e (событие)
+        onChangeChecked?.(e.currentTarget.checked); // если есть пропс onChangeChecked, то передать ему текущее состояние чекбокса
+    };
 
-        onChangeChecked?.(e.currentTarget.checked) // если есть пропс onChangeChecked, то передать ему состояние чекбокса
-    }
-
-    // Класс для чекбокса
-    const finalInputClassName = s.checkbox + (className ? ' ' + className : '')
+    const finalInputClassName = s.checkbox
+        + (className ? ' ' + className : '');
 
     return (
         <label className={s.label}>
@@ -47,13 +41,13 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
             {children && (
                 <span
                     id={id ? id + '-span' : undefined}
-                    className={s.spanClassName}
+                    className={spanClassName}
                 >
                     {children}
                 </span>
             )}
         </label> // благодаря label нажатие на спан передастся в инпут
-    )
+    );
 }
 
-export default SuperCheckbox
+export default SuperCheckbox;
