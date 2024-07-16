@@ -8,6 +8,10 @@ const Stand = () => {
     const [text, setText] = useState<string>(''); // Состояние для хранения текста из инпута
     const [checked, setChecked] = useState<boolean>(false); // Состояние для хранения состояния чекбокса
 
+    const onEnterHandler = () => {
+        setText(''); // Очистка поля ввода при нажатии Enter
+    }
+
     return (
         <div className={s.stand}>
             <div className={s.inputs}>
@@ -15,12 +19,13 @@ const Stand = () => {
                     id="hw4-super-input-with-error" // Добавляем id для первого инпута
                     value={text} // Значение инпута берется из состояния
                     onChangeText={setText} // Функция для обновления состояния при изменении текста
-                    onEnter={() => alert(`Entered: ${text}`)} // Функция для вызова алерта при нажатии Enter
+                    onEnter={onEnterHandler} // Обработка нажатия Enter
                     error={text ? '' : 'Text is required'} // Показ ошибки, если текст пустой
                 />
                 <SuperInputText
                     id="hw4-super-input-default" // Добавляем id для второго инпута
-                    value={'default'}
+                    value={text}
+                    onChangeText={setText}
                 /> {/* Инпут с дефолтным значением */}
             </div>
             <div className={s.buttons}>
@@ -33,7 +38,7 @@ const Stand = () => {
                 <SuperCheckbox id="hw4-super-checkbox-with-text" checked={checked} onChangeChecked={setChecked}>
                     Some text
                 </SuperCheckbox> {/* Чекбокс с текстом "Some text" */}
-                <SuperCheckbox id="hw4-super-checkbox-like-old" checked={!checked} onChangeChecked={setChecked}>
+                <SuperCheckbox id="hw4-super-checkbox-like-old" checked={!checked} onChangeChecked={() => setChecked(!checked)}>
                     Some other text
                 </SuperCheckbox> {/* Чекбокс с текстом "Some other text" */}
             </div>
