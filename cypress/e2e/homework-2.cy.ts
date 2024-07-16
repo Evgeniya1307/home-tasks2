@@ -18,4 +18,24 @@ describe('Homework 2', () => {
       expect(priorities.includes('high') && priorities.includes('middle') && priorities.includes('low')).to.be.true;
     });
   });
+
+  // Добавляем новые тесты для проверки состояния checkbox-ов
+  describe('Checkbox testing', () => {
+    it('should check the first checkbox', () => {
+      // Получаем первый checkbox и проверяем, что он существует
+      cy.get('#hw4-super-checkbox-like-old')
+        .should('exist')
+        .check()
+        .should('be.checked');
+    });
+
+    it('should uncheck the second checkbox', () => {
+      // Получаем второй checkbox и проверяем, что он существует
+      cy.get('#hw4-super-checkbox-with-text')
+        .should('exist')
+        .uncheck()
+        .should('not.be.checked');
+    });
+  });
+
 });
