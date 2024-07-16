@@ -23,7 +23,7 @@ const Stand = () => {
                     error={text ? '' : 'Text is required'} // Показ ошибки, если текст пустой
                 />
                 <SuperInputText
-                    id="hw4-super-input-default" // Добавляем id для второго инпута
+                    id="hw4-super-input-like-old" // Добавляем id для второго инпута
                     value={text}
                     onChangeText={setText}
                 /> {/* Инпут с дефолтным значением */}
@@ -47,3 +47,4 @@ const Stand = () => {
 }
 
 export default Stand;
+
