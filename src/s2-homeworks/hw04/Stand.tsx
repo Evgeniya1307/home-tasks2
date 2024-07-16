@@ -1,98 +1,37 @@
 import React, { useState } from 'react'
-import s from './Stand.module.css'
-import SuperInputText from './common/c1-SuperInputText/SuperInputText'
-import SuperCheckbox from './common/c3-SuperCheckbox/SuperCheckbox'
-import SuperButton from './common/c2-SuperButton/SuperButton'
+import SuperInputText from './common/c1-SuperInputText/SuperInputText' 
+import SuperButton from './common/c2-SuperButton/SuperButton' 
+import SuperCheckbox from './common/c3-SuperCheckbox/SuperCheckbox' 
+import s from './Stand.module.css' 
 
 const Stand = () => {
-    const [stateForAllInputs, setValue] = useState<string>('')
-    const [error, setError] = useState<string>('')
-
-    const [stateForAllCheckboxes, setChecked] = useState<boolean>(false)
+    const [text, setText] = useState<string>('') // Состояние для хранения текста из инпута
+    const [checked, setChecked] = useState<boolean>(false) // Состояние для хранения состояния чекбокса
 
     return (
-        <div id={'hw4-stand'} className={s.stand}>
+        <div className={s.stand}>
             <div className={s.inputs}>
-                {/*совместим со старым кодом:*/}
-                <div>
-                    <SuperInputText
-                        id={'hw4-super-input-like-old'}
-                        value={stateForAllInputs}
-                        onChange={(e) => setValue(e.currentTarget.value)}
-                    />
-                </div>
-                {/*инпут с ошибкой:*/}
-                <div>
-                    <SuperInputText
-                        id={'hw4-super-input-with-error'}
-                        value={stateForAllInputs}
-                        onChangeText={setValue}
-                        error={error}
-                        onEnter={() => {
-                            setError(
-                                stateForAllInputs.trim()
-                                    ? ''
-                                    : 'Error'
-                            )
-                            setValue('')
-                        }}
-                    />
-                </div>
+                <SuperInputText
+                    value={text} // Значение инпута берется из состояния
+                    onChangeText={setText} // Функция для обновления состояния при изменении текста
+                    onEnter={() => alert(`Entered: ${text}`)} // Функция для вызова алерта при нажатии Enter
+                    error={text ? '' : 'Text is required'} // Показ ошибки, если текст пустой
+                />
+                <SuperInputText value={'default'} /> {/* Инпут с дефолтным значением */}
             </div>
-
             <div className={s.buttons}>
-                {/*обычная кнопка:*/}
-                <div>
-                    <SuperButton id={'hw4-super-button-default'}>
-                        default
-                    </SuperButton>
-                </div>
-                {/*красная кнопка:*/}
-                <div>
-                    <SuperButton id={'hw4-super-button-red'} xType={'red'}>
-                        red
-                    </SuperButton>
-                </div>
-                {/*задизэйбленная кнопка:*/}
-                <div>
-                    <SuperButton
-                        id={'hw4-super-button-disabled'}
-                        xType={'red'}
-                        disabled
-                    >
-                        disabled
-                    </SuperButton>
-                </div>
-                {/*задизэйбленная кнопка:*/}
-                <div>
-                    <SuperButton
-                        id={'hw4-super-button-secondary'}
-                        xType={'secondary'}
-                    >
-                        secondary
-                    </SuperButton>
-                </div>
+                <SuperButton>default</SuperButton> {/* Кнопка с текстом "default" */}
+                <SuperButton xType={'red'}>red</SuperButton> {/* Кнопка с типом "red" */}
+                <SuperButton xType={'secondary'}>secondary</SuperButton> {/* Кнопка с типом "secondary" */}
+                <SuperButton disabled>disabled</SuperButton> {/* Отключенная кнопка */}
             </div>
-
             <div className={s.checkboxes}>
-                {/*чекбокс с текстом:*/}
-                <div>
-                    <SuperCheckbox
-                        id={'hw4-super-checkbox-with-text'}
-                        checked={stateForAllCheckboxes}
-                        onChangeChecked={setChecked}
-                    >
-                        some text
-                    </SuperCheckbox>
-                </div>
-                {/*совместим со старым кодом:*/}
-                <div>
-                    <SuperCheckbox
-                        id={'hw4-super-checkbox-like-old'}
-                        checked={stateForAllCheckboxes}
-                        onChange={(e) => setChecked(e.currentTarget.checked)}
-                    />
-                </div>
+                <SuperCheckbox checked={checked} onChangeChecked={setChecked}>
+                    Some text
+                </SuperCheckbox> {/* Чекбокс с текстом "Some text" */}
+                <SuperCheckbox checked={!checked} onChangeChecked={setChecked}>
+                    Some other text
+                </SuperCheckbox> {/* Чекбокс с текстом "Some other text" */}
             </div>
         </div>
     )
