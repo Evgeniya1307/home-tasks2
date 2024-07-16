@@ -1,7 +1,7 @@
 import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import s from './SuperCheckbox.module.css';
 
-// тип пропсов обычного инпута
+// Тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 type SuperCheckboxPropsType = Omit<DefaultInputPropsType, 'type'> & {
@@ -15,19 +15,20 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
         onChangeChecked,
         className,
         spanClassName,
-        children, // в эту переменную попадёт текст, типизировать не нужно так как он затипизирован в React.FC
+        children,
         id,
 
         ...restProps // все остальные пропсы попадут в объект restProps
     }
 ) => {
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange?.(e); // если есть пропс onChange, то передать ему e (событие)
-        onChangeChecked?.(e.currentTarget.checked); // если есть пропс onChangeChecked, то передать ему текущее состояние чекбокса
+        // Передаем событие изменения родительскому компоненту
+        onChange?.(e);
+        // Передаем состояние чекбокса родительскому компоненту
+        onChangeChecked?.(e.currentTarget.checked);
     };
 
-    const finalInputClassName = s.checkbox
-        + (className ? ' ' + className : '');
+    const finalInputClassName = s.checkbox + (className ? ' ' + className : '');
 
     return (
         <label className={s.label}>
@@ -36,12 +37,12 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
                 type={'checkbox'}
                 onChange={onChangeCallback}
                 className={finalInputClassName}
-                {...restProps} // отдаём инпуту остальные пропсы если они есть (checked например там внутри)
+                {...restProps}
             />
             {children && (
                 <span
                     id={id ? id + '-span' : undefined}
-                    className={spanClassName}
+                    className={s.spanClassName}
                 >
                     {children}
                 </span>
