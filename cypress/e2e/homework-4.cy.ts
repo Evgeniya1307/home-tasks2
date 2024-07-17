@@ -37,4 +37,32 @@ describe('Homework 4', () => {
         .should('not.be.checked'); // Проверяем, что чекбокс не отмечен
     });
   });
+
+  // Проверка инпутов в Homework 4
+  describe('SuperInputText tests', () => {
+    it('should have the same value in the second input as the first one', () => {
+      cy.get('#hw4-super-input-like-old')
+        .type('some text')
+        .should('have.value', 'some text');
+
+      cy.get('#hw4-super-input-with-error')
+        .should('have.value', 'some text');
+    });
+
+    it('should clear both inputs when pressing enter on the second input', () => {
+      cy.get('#hw4-super-input-with-error')
+        .type('some text{enter}')
+        .should('have.value', '');
+
+      cy.get('#hw4-super-input-like-old')
+        .should('have.value', '');
+    });
+
+    it('should show error input class when pressing enter on an empty input', () => {
+      cy.get('#hw4-super-input-with-error')
+        .clear()
+        .type('{enter}')
+        .should('have.class', 'errorInput');
+    });
+  });
 });
