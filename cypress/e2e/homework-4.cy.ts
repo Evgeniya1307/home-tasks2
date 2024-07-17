@@ -3,7 +3,7 @@
 
 export {}; // Добавляет экспорт, чтобы TypeScript считал файл модулем
 
-describe('Homework 2', () => {
+describe('Homework 4', () => {
   before(() => {
     cy.visit('/'); // Теперь Cypress будет использовать baseUrl из cypress.config.ts
   });
@@ -23,7 +23,7 @@ describe('Homework 2', () => {
   describe('Checkbox testing', () => {
     it('should check the first checkbox', () => {
       // Получаем первый checkbox и проверяем, что он существует
-      cy.get('#hw4-super-checkbox-like-old')
+      cy.get('#hw4-super-checkbox-with-text')
         .should('exist')
         .check({ force: true }) // Принудительно отмечаем чекбокс
         .should('be.checked'); // Проверяем, что чекбокс отмечен
@@ -31,7 +31,7 @@ describe('Homework 2', () => {
 
     it('should uncheck the second checkbox', () => {
       // Получаем второй checkbox и проверяем, что он существует
-      cy.get('#hw4-super-checkbox-with-text')
+      cy.get('#hw4-super-checkbox-like-old')
         .should('exist')
         .uncheck({ force: true }) // Принудительно снимаем отметку с чекбокса
         .should('not.be.checked'); // Проверяем, что чекбокс не отмечен
