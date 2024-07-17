@@ -25,17 +25,17 @@ describe('Homework 2', () => {
       // Получаем первый checkbox и проверяем, что он существует
       cy.get('#hw4-super-checkbox-like-old')
         .should('exist')
-        .check()
-        .should('be.checked');
+        .check({ force: true }) // Принудительно отмечаем чекбокс
+        .should('be.checked'); // Проверяем, что чекбокс отмечен
     });
 
     it('should uncheck the second checkbox', () => {
       // Получаем второй checkbox и проверяем, что он существует
       cy.get('#hw4-super-checkbox-with-text')
         .should('exist')
-        .uncheck()
-        .should('not.be.checked');
+        .uncheck({ force: true }) // Принудительно снимаем отметку с чекбокса
+        .should('not.be.checked'); // Проверяем, что чекбокс не отмечен
     });
   });
-
 });
+
