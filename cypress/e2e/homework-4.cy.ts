@@ -4,6 +4,7 @@
 export {}; // Добавляет экспорт, чтобы TypeScript считал файл модулем
 
 describe('Homework 4', () => {
+  // Перед запуском тестов, посетите базовый URL, установленный в cypress.config.ts
   before(() => {
     cy.visit('/'); // Теперь Cypress будет использовать baseUrl из cypress.config.ts
   });
@@ -22,7 +23,7 @@ describe('Homework 4', () => {
   // Добавляем новые тесты для проверки состояния checkbox-ов
   describe('Checkbox testing', () => {
     it('should check the first checkbox', () => {
-      // Получаем первый checkbox и проверяем, что он существует
+      // Получаем первый чекбокс и проверяем, что он существует
       cy.get('#hw4-super-checkbox-with-text')
         .should('exist')
         .check({ force: true }) // Принудительно отмечаем чекбокс
@@ -30,7 +31,7 @@ describe('Homework 4', () => {
     });
 
     it('should uncheck the second checkbox', () => {
-      // Получаем второй checkbox и проверяем, что он существует
+      // Получаем второй чекбокс и проверяем, что он существует
       cy.get('#hw4-super-checkbox-like-old')
         .should('exist')
         .uncheck({ force: true }) // Принудительно снимаем отметку с чекбокса
@@ -38,31 +39,31 @@ describe('Homework 4', () => {
     });
   });
 
-  // Проверка инпутов в Homework 4
   describe('SuperInputText tests', () => {
     it('should have the same value in the second input as the first one', () => {
-      cy.get('#hw4-super-input-like-old')
-        .type('some text')
-        .should('have.value', 'some text');
+      const someText = 'some text'; // Задаем текст для проверки
+      cy.get('#hw4-super-input-with-error') // Находим первый инпут
+        .type(someText) // Вводим текст
+        .should('have.value', someText); // Проверяем, что текст был введен
 
-      cy.get('#hw4-super-input-with-error')
-        .should('have.value', 'some text');
+      cy.get('#hw4-super-input-like-old') // Находим второй инпут
+        .should('have.value', someText); // Проверяем, что текст совпадает
     });
 
     it('should clear both inputs when pressing enter on the second input', () => {
-      cy.get('#hw4-super-input-with-error')
-        .type('some text{enter}')
-        .should('have.value', '');
+      cy.get('#hw4-super-input-like-old') // Находим второй инпут
+        .type('{enter}') // Нажимаем Enter
+        .should('have.value', ''); // Проверяем, что инпут очищен
 
-      cy.get('#hw4-super-input-like-old')
-        .should('have.value', '');
+      cy.get('#hw4-super-input-with-error') // Проверяем первый инпут
+        .should('have.value', ''); // Проверяем, что инпут очищен
     });
 
     it('should show error input class when pressing enter on an empty input', () => {
-      cy.get('#hw4-super-input-with-error')
-        .clear()
-        .type('{enter}')
-        .should('have.class', 'errorInput');
+      cy.get('#hw4-super-input-with-error') // Находим первый инпут
+        .clear() // Очищаем инпут
+        .type('{enter}') // Нажимаем Enter
+        .should('have.class', 'errorInput'); // Проверяем, что инпут имеет класс ошибки 
     });
   });
 });

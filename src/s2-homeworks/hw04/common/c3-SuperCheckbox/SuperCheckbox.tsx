@@ -4,27 +4,29 @@ import s from './SuperCheckbox.module.css';
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
+// Дополнительные пропсы для SuperCheckbox
 type SuperCheckboxPropsType = Omit<DefaultInputPropsType, 'type'> & {
   onChangeChecked?: (checked: boolean) => void;
   spanClassName?: string;
 };
 
+// Компонент SuperCheckbox
 const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
   onChange,
   onChangeChecked,
   className,
   spanClassName,
-  children, // в эту переменную попадёт текст, типизировать не нужно так как он затипизирован в React.FC
+  children, // текст внутри чекбокса
   id,
-  ...restProps // все остальные пропсы попадут в объект restProps
+  ...restProps // остальные пропсы
 }) => {
   // Обработчик изменения состояния чекбокса
   const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e);
-    onChangeChecked?.(e.currentTarget.checked);
+    onChange?.(e); // вызов внешнего onChange, если он есть
+    onChangeChecked?.(e.currentTarget.checked); // вызов внешнего onChangeChecked, если он есть
   };
 
-  // Финальный класс для инпута с учетом переданных классов
+  // Классы для чекбокса
   const finalInputClassName = s.checkbox + (className ? ' ' + className : '');
 
   return (
@@ -34,7 +36,7 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
         type={'checkbox'}
         onChange={onChangeCallback}
         className={finalInputClassName}
-        {...restProps} // Отдаём инпуту остальные пропсы, если они есть (например, checked)
+        {...restProps} // передача остальных пропсов в input
       />
       {children && (
         <span id={id ? id + '-span' : undefined} className={spanClassName}>
@@ -43,6 +45,6 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
       )}
     </label>
   );
-};
+}
 
 export default SuperCheckbox;
