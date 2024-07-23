@@ -18,6 +18,7 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
   spanClassName,
   children, // текст внутри чекбокса
   id,
+  checked, // добавляем checked
   ...restProps // остальные пропсы
 }) => {
   // Обработчик изменения состояния чекбокса
@@ -34,6 +35,7 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
       <input
         id={id}
         type={'checkbox'}
+        checked={checked} // добавляем checked
         onChange={onChangeCallback}
         className={finalInputClassName}
         {...restProps} // передача остальных пропсов в input

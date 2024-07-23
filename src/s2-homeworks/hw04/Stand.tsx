@@ -22,15 +22,23 @@ const Stand = () => {
       </div>
       <div className={s.buttons}>
         <SuperButton id='hw4-super-button-default'>default</SuperButton>
-        <SuperButton id='hw4-super-button-red' xType={'red'}>red</SuperButton>
-        <SuperButton id='hw4-super-button-secondary' xType={'secondary'}>secondary</SuperButton>
+        <SuperButton id='hw4-super-button-red' xType='red'>red</SuperButton>
+        <SuperButton id='hw4-super-button-secondary' xType='secondary'>secondary</SuperButton>
         <SuperButton id='hw4-super-button-disabled' disabled>disabled</SuperButton>
       </div>
       <div className={s.checkboxes}>
-        <SuperCheckbox id='hw4-super-checkbox-with-text' checked={checked} onChangeChecked={setChecked}>
+        <SuperCheckbox
+          id='hw4-super-checkbox-with-text'
+          checked={checked}
+          onChangeChecked={setChecked}
+        >
           Some text
         </SuperCheckbox>
-        <SuperCheckbox id='hw4-super-checkbox-like-old' checked={!checked} onChangeChecked={setChecked}>
+        <SuperCheckbox
+          id='hw4-super-checkbox-like-old'
+          checked={!checked}
+          onChangeChecked={setChecked}
+        >
           Some other text
         </SuperCheckbox>
       </div>
@@ -39,3 +47,4 @@ const Stand = () => {
 }
 
 export default Stand;
+
