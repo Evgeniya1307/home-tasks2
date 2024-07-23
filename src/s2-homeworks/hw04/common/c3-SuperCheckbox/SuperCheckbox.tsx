@@ -50,3 +50,4 @@ const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
 }
 
 export default SuperCheckbox;
+
