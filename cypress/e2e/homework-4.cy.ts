@@ -7,29 +7,31 @@
   describe('Checkbox testing', () => {
   
     it('should check the first checkbox', () => {
-      // Принудительно отмечаем чекбокс через изменение его свойства checked
-      cy.get('#hw4-super-checkbox-with-text', { timeout: 10000 })
-        .should('exist')
-        .should('be.visible') // Убедимся, что чекбокс виден
-        .invoke('prop', 'checked', true) // Принудительно устанавливаем свойство checked
-        .trigger('change') // Триггерим событие изменения
+      // Проверим, что первый чекбокс существует, видим и не отмечен
+      cy.get('#hw4-super-checkbox-with-text')
+        .should('exist') // Проверяем, что чекбокс существует
+        .should('be.visible') // Проверяем, что чекбокс виден
+        .should('not.be.checked') // Проверяем, что чекбокс не отмечен
+        .check() // Отмечаем чекбокс
         .should('be.checked'); // Проверяем, что чекбокс отмечен
     });
   
     it('should uncheck the second checkbox', () => {
-      // Принудительно снимаем отметку через изменение его свойства checked
-      cy.get('#hw4-super-checkbox-like-old', { timeout: 10000 })
-        .should('exist')
-        .should('be.visible') // Убедимся, что чекбокс виден
-        .invoke('prop', 'checked', false) // Принудительно снимаем свойство checked
-        .trigger('change') // Триггерим событие изменения
-        .should('not.be.checked'); // Проверяем, что чекбокс не отмечен
+      // Проверим, что второй чекбокс существует, видим и отмечен
+      cy.get('#hw4-super-checkbox-like-old')
+        .should('exist') // Проверяем, что чекбокс существует
+        .should('be.visible') // Проверяем, что чекбокс виден
+        .should('be.checked') // Проверяем, что чекбокс уже отмечен
+        .uncheck() // Снимаем отметку с чекбокса
+        .should('not.be.checked'); // Проверяем, что чекбокс больше не отмечен
     });
   });
   
   // Другие тесты
   it('should include all kinds of priorities (low, middle, high)', () => {
     const priorities: string[] = []; // Явно указываем тип переменной как массив строк
+  
+    // Проходим по всем элементам с id, начинающимся с 'hw2-priority-'
     cy.get('[id^=hw2-priority-]').each((element) => {
       cy.wrap(element)
         .invoke('text')
