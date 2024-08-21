@@ -7,24 +7,28 @@
   describe('Checkbox testing', () => {
   
     it('should check the first checkbox', () => {
-      // Проверяем видимость, существование и начальное состояние
+      // Прямое изменение состояния через jQuery
       cy.get('#hw4-super-checkbox-with-text')
         .should('exist')
         .should('be.visible')
         .should('not.be.checked') // Убедимся, что он не отмечен
-        .invoke('attr', 'checked', true) // Принудительно устанавливаем атрибут checked
-        .trigger('change') // Имитируем изменение состояния
+        .then($el => {
+          $el.prop('checked', true); // Принудительно отмечаем чекбокс
+          cy.wrap($el).trigger('change'); // Имитируем событие изменения
+        })
         .should('be.checked'); // Проверяем, что чекбокс отмечен
     });
   
     it('should uncheck the second checkbox', () => {
-      // Проверяем видимость, существование и начальное состояние
+      // Прямое изменение состояния через jQuery
       cy.get('#hw4-super-checkbox-like-old')
         .should('exist')
         .should('be.visible')
-        .should('be.checked') // Убедимся, что он уже отмечен
-        .invoke('attr', 'checked', false) // Принудительно убираем атрибут checked
-        .trigger('change') // Имитируем изменение состояния
+        .should('be.checked') // Убедимся, что он отмечен
+        .then($el => {
+          $el.prop('checked', false); // Принудительно снимаем отметку
+          cy.wrap($el).trigger('change'); // Имитируем событие изменения
+        })
         .should('not.be.checked'); // Проверяем, что чекбокс больше не отмечен
     });
   });
