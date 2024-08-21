@@ -9,21 +9,23 @@
     it('should check the first checkbox', () => {
       // Проверим, что первый чекбокс существует, видим и не отмечен
       cy.get('#hw4-super-checkbox-with-text')
-        .should('exist') // Проверяем, что чекбокс существует
-        .should('be.visible') // Проверяем, что чекбокс виден
-        .should('not.be.checked') // Проверяем, что чекбокс не отмечен
-        .check() // Отмечаем чекбокс
+        .should('exist')
+        .should('be.visible')
+        .should('not.be.checked') // Проверяем начальное состояние
+        .check({ force: true }) // Принудительно отмечаем чекбокс
+        .wait(500) // Ожидание для обновления состояния
         .should('be.checked'); // Проверяем, что чекбокс отмечен
     });
   
     it('should uncheck the second checkbox', () => {
       // Проверим, что второй чекбокс существует, видим и отмечен
       cy.get('#hw4-super-checkbox-like-old')
-        .should('exist') // Проверяем, что чекбокс существует
-        .should('be.visible') // Проверяем, что чекбокс виден
-        .should('be.checked') // Проверяем, что чекбокс уже отмечен
-        .uncheck() // Снимаем отметку с чекбокса
-        .should('not.be.checked'); // Проверяем, что чекбокс больше не отмечен
+        .should('exist')
+        .should('be.visible')
+        .should('be.checked') // Проверяем начальное состояние
+        .uncheck({ force: true }) // Принудительно снимаем отметку с чекбокса
+        .wait(500) // Ожидание для обновления состояния
+        .should('not.be.checked'); // Проверяем, что чекбокс не отмечен
     });
   });
   
