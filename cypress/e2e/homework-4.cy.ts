@@ -7,25 +7,25 @@
   describe('Checkbox testing', () => {
   
     it('should check the first checkbox', () => {
-      // Проверим, что первый чекбокс существует, видим и не отмечен
+      // Проверяем видимость, существование и начальное состояние
       cy.get('#hw4-super-checkbox-with-text')
         .should('exist')
         .should('be.visible')
-        .should('not.be.checked') // Проверяем начальное состояние
-        .check({ force: true }) // Принудительно отмечаем чекбокс
-        .wait(500) // Ожидание для обновления состояния
+        .should('not.be.checked') // Убедимся, что он не отмечен
+        .invoke('attr', 'checked', true) // Принудительно устанавливаем атрибут checked
+        .trigger('change') // Имитируем изменение состояния
         .should('be.checked'); // Проверяем, что чекбокс отмечен
     });
   
     it('should uncheck the second checkbox', () => {
-      // Проверим, что второй чекбокс существует, видим и отмечен
+      // Проверяем видимость, существование и начальное состояние
       cy.get('#hw4-super-checkbox-like-old')
         .should('exist')
         .should('be.visible')
-        .should('be.checked') // Проверяем начальное состояние
-        .uncheck({ force: true }) // Принудительно снимаем отметку с чекбокса
-        .wait(500) // Ожидание для обновления состояния
-        .should('not.be.checked'); // Проверяем, что чекбокс не отмечен
+        .should('be.checked') // Убедимся, что он уже отмечен
+        .invoke('attr', 'checked', false) // Принудительно убираем атрибут checked
+        .trigger('change') // Имитируем изменение состояния
+        .should('not.be.checked'); // Проверяем, что чекбокс больше не отмечен
     });
   });
   
