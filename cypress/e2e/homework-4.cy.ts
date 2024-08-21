@@ -5,24 +5,24 @@
   
   // Тестирование чекбоксов
   describe('Checkbox testing', () => {
-    
+  
     it('should check the first checkbox', () => {
-      // Принудительно отмечаем чекбокс через его значение
+      // Принудительно отмечаем чекбокс через изменение его свойства checked
       cy.get('#hw4-super-checkbox-with-text', { timeout: 10000 })
         .should('exist')
-        .should('be.visible') // Убедимся, что чекбокс видим
-        .invoke('prop', 'checked', true) // Принудительно устанавливаем состояние "checked"
-        .trigger('change') // Имитируем событие изменения
+        .should('be.visible') // Убедимся, что чекбокс виден
+        .invoke('prop', 'checked', true) // Принудительно устанавливаем свойство checked
+        .trigger('change') // Триггерим событие изменения
         .should('be.checked'); // Проверяем, что чекбокс отмечен
     });
   
     it('should uncheck the second checkbox', () => {
-      // Принудительно снимаем отметку через его значение
+      // Принудительно снимаем отметку через изменение его свойства checked
       cy.get('#hw4-super-checkbox-like-old', { timeout: 10000 })
         .should('exist')
-        .should('be.visible') // Убедимся, что чекбокс видим
-        .invoke('prop', 'checked', false) // Принудительно снимаем отметку
-        .trigger('change') // Имитируем событие изменения
+        .should('be.visible') // Убедимся, что чекбокс виден
+        .invoke('prop', 'checked', false) // Принудительно снимаем свойство checked
+        .trigger('change') // Триггерим событие изменения
         .should('not.be.checked'); // Проверяем, что чекбокс не отмечен
     });
   });
@@ -30,8 +30,6 @@
   // Другие тесты
   it('should include all kinds of priorities (low, middle, high)', () => {
     const priorities: string[] = []; // Явно указываем тип переменной как массив строк
-  
-    // Проходим по всем элементам с id, начинающимся с 'hw2-priority-'
     cy.get('[id^=hw2-priority-]').each((element) => {
       cy.wrap(element)
         .invoke('text')
@@ -45,7 +43,6 @@
       expect(priorities.includes('low')).to.be.true;
     });
   });
-  
   
   describe('SuperInputText tests', () => {
   
