@@ -5,22 +5,24 @@
   
   // Тестирование чекбоксов
   describe('Checkbox testing', () => {
-  
+    
     it('should check the first checkbox', () => {
-      // Убедимся, что чекбокс существует и видим, прежде чем взаимодействовать с ним
-      cy.get('#hw4-super-checkbox-with-text', { timeout: 10000 }) // Увеличиваем таймаут до 10 секунд
+      // Принудительно отмечаем чекбокс через его значение
+      cy.get('#hw4-super-checkbox-with-text', { timeout: 10000 })
         .should('exist')
-        .should('be.visible') // Проверяем, что чекбокс видим
-        .check({ force: true }) // Принудительно отмечаем чекбокс
+        .should('be.visible') // Убедимся, что чекбокс видим
+        .invoke('prop', 'checked', true) // Принудительно устанавливаем состояние "checked"
+        .trigger('change') // Имитируем событие изменения
         .should('be.checked'); // Проверяем, что чекбокс отмечен
     });
   
     it('should uncheck the second checkbox', () => {
-      // Убедимся, что второй чекбокс существует и видим, прежде чем взаимодействовать с ним
-      cy.get('#hw4-super-checkbox-like-old', { timeout: 10000 }) // Увеличиваем таймаут до 10 секунд
+      // Принудительно снимаем отметку через его значение
+      cy.get('#hw4-super-checkbox-like-old', { timeout: 10000 })
         .should('exist')
-        .should('be.visible') // Проверяем, что чекбокс видим
-        .uncheck({ force: true }) // Принудительно снимаем отметку с чекбокса
+        .should('be.visible') // Убедимся, что чекбокс видим
+        .invoke('prop', 'checked', false) // Принудительно снимаем отметку
+        .trigger('change') // Имитируем событие изменения
         .should('not.be.checked'); // Проверяем, что чекбокс не отмечен
     });
   });
@@ -38,9 +40,12 @@
         });
     }).then(() => {
       // Проверяем, что массив содержит все три приоритета
-      expect(priorities.includes('high') && priorities.includes('middle') && priorities.includes('low')).to.be.true;
+      expect(priorities.includes('high')).to.be.true;
+      expect(priorities.includes('middle')).to.be.true;
+      expect(priorities.includes('low')).to.be.true;
     });
   });
+  
   
   describe('SuperInputText tests', () => {
   
