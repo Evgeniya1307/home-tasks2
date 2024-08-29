@@ -6,24 +6,24 @@ import s from './Stand.module.css';
 
 const Stand = () => {
   const [text, setText] = useState<string>('');
-  const [checked, setChecked] = useState<boolean>(false);
+  const [isFirstChecked, setIsFirstChecked] = useState<boolean>(false);
 
   const handleFirstCheckboxChange = (isChecked: boolean) => {
-    setChecked(isChecked);
+    setIsFirstChecked(isChecked);
   };
 
   const handleSecondCheckboxChange = (isChecked: boolean) => {
-    setChecked(!isChecked);
+    setIsFirstChecked(!isChecked);
   };
 
   return (
     <div className={s.stand}>
       <div className={s.inputs}>
         <SuperInputText
-          id='hw4-super-input-with-error' // добавляем id
+          id='hw4-super-input-with-error'
           value={text}
           onChangeText={setText}
-          onEnter={() => setText('')} // Очищаем текст при нажатии Enter
+          onEnter={() => setText('')}
           error={text ? '' : 'Text is required'}
         />
         <SuperInputText id='hw4-super-input-like-old' value={text} />
@@ -37,14 +37,14 @@ const Stand = () => {
       <div className={s.checkboxes}>
         <SuperCheckbox
           id='hw4-super-checkbox-with-text'
-          checked={checked}
+          checked={isFirstChecked}
           onChangeChecked={handleFirstCheckboxChange}
         >
           Some text
         </SuperCheckbox>
         <SuperCheckbox
           id='hw4-super-checkbox-like-old'
-          checked={!checked}
+          checked={!isFirstChecked}
           onChangeChecked={handleSecondCheckboxChange}
         >
           Some other text
