@@ -6,24 +6,26 @@ import s from './Stand.module.css';
 
 const Stand = () => {
   const [text, setText] = useState<string>('');
-  const [isFirstChecked, setIsFirstChecked] = useState<boolean>(false);
+  const [checked, setChecked] = useState<boolean>(false);
 
   const handleFirstCheckboxChange = (isChecked: boolean) => {
-    setIsFirstChecked(isChecked);
+    console.log('First Checkbox:', isChecked); // Добавлено для диагностики
+    setChecked(isChecked);
   };
 
   const handleSecondCheckboxChange = (isChecked: boolean) => {
-    setIsFirstChecked(!isChecked);
+    console.log('Second Checkbox:', !isChecked); // Добавлено для диагностики
+    setChecked(!isChecked);
   };
 
   return (
     <div className={s.stand}>
       <div className={s.inputs}>
         <SuperInputText
-          id='hw4-super-input-with-error'
+          id='hw4-super-input-with-error' // добавляем id
           value={text}
           onChangeText={setText}
-          onEnter={() => setText('')}
+          onEnter={() => setText('')} // Очищаем текст при нажатии Enter
           error={text ? '' : 'Text is required'}
         />
         <SuperInputText id='hw4-super-input-like-old' value={text} />
@@ -37,14 +39,14 @@ const Stand = () => {
       <div className={s.checkboxes}>
         <SuperCheckbox
           id='hw4-super-checkbox-with-text'
-          checked={isFirstChecked}
+          checked={checked}
           onChangeChecked={handleFirstCheckboxChange}
         >
           Some text
         </SuperCheckbox>
         <SuperCheckbox
           id='hw4-super-checkbox-like-old'
-          checked={!isFirstChecked}
+          checked={!checked}
           onChangeChecked={handleSecondCheckboxChange}
         >
           Some other text

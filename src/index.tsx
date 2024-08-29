@@ -1,16 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter as Router } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './s1-main/App';
 import reportWebVitals from './reportWebVitals';
 
-ReactDOM.render(
-  <Router basename={process.env.PUBLIC_URL}>
+const rootElement = document.getElementById('root');
+const root = ReactDOM.createRoot(rootElement!);
+
+root.render(
+  <React.StrictMode>
     <App />
-  </Router>,
-  document.getElementById('root')
+  </React.StrictMode>
 );
 
 reportWebVitals();
-
