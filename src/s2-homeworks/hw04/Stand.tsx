@@ -9,13 +9,13 @@ const Stand = () => {
   const [checked, setChecked] = useState<boolean>(false);
 
   const handleFirstCheckboxChange = (isChecked: boolean) => {
-    console.log('First Checkbox:', isChecked); // Добавлено для диагностики
     setChecked(isChecked);
+    console.log('First Checkbox:', isChecked);
   };
 
   const handleSecondCheckboxChange = (isChecked: boolean) => {
-    console.log('Second Checkbox:', !isChecked); // Добавлено для диагностики
     setChecked(!isChecked);
+    console.log('Second Checkbox:', !isChecked);
   };
 
   return (
@@ -46,7 +46,7 @@ const Stand = () => {
         </SuperCheckbox>
         <SuperCheckbox
           id='hw4-super-checkbox-like-old'
-          checked={!checked}
+          checked={checked}  // Изменим проверку на использование `checked`
           onChangeChecked={handleSecondCheckboxChange}
         >
           Some other text
