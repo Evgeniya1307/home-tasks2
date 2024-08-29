@@ -1,5 +1,10 @@
-.buttonsContainer {
+/* Контейнер для редактируемого спана */
+.editableSpanContainer {
+    margin-bottom: 20px;
 }
 
-.editableSpanContainer {
+/* Контейнер для кнопок */
+.buttonsContainer {
+    display: flex;
+    gap: 10px;
 }

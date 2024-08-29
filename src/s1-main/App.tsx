@@ -1,5 +1,6 @@
 import React from 'react';
 import HW5 from '.././s2-homeworks/hw05/HW5';
+import HW6 from '@/s2-homeworks/hw06/HW6';
 // import HW1 from './components/hw01/HW1';
 // import HW2 from './components/hw02/HW2';
 // import HW3 from './components/hw03/HW3';
@@ -14,6 +15,7 @@ function App() {
             {/* <HW3 /> */}
             {/* <HW4 /> */}
             <HW5 />
+            <HW6/>
         </div>
     );
 }
