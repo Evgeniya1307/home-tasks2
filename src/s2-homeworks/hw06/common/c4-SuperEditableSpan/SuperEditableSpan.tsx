@@ -9,84 +9,77 @@ import SuperInputText from '../../../hw04/common/c1-SuperInputText/SuperInputTex
 import editIcon from './editIcon.svg'
 
 // Тип пропсов обычного инпута
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement>
+type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 // Тип пропсов обычного спана
-type DefaultSpanPropsType = DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>,
-    HTMLSpanElement>
+type DefaultSpanPropsType = DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>
 
-// Здесь мы говорим что у нашего инпута будут такие же пропсы как у обычного инпута, кроме type
-// (чтоб не писать value: string, onChange: ...; они уже все описаны в DefaultInputPropsType)
+// Здесь мы говорим, что у нашего инпута будут такие же пропсы как у обычного инпута, кроме type
+// (чтобы не писать value: string, onChange: ...; они уже все описаны в DefaultInputPropsType)
 type SuperEditableSpanType = Omit<DefaultInputPropsType, 'type'> & {
-    // И + ещё пропсы которых нет в стандартном инпуте
+    // И + ещё пропсы, которых нет в стандартном инпуте
     onChangeText?: (value: string) => void
     onEnter?: () => void
     error?: string
 
-    spanProps?: DefaultSpanPropsType  & {defaultText?: string}// Пропсы для спана
+    spanProps?: DefaultSpanPropsType  & { defaultText?: string } // Пропсы для спана
 }
 
 const SuperEditableSpan: React.FC<SuperEditableSpanType> = (
     {
-        autoFocus,    // Автофокус на инпуте
-        onBlur,       // Событие потери фокуса
-        onEnter,      // Событие нажатия Enter
-        spanProps,
+        autoFocus, // Автоматический фокус на инпуте при переключении в режим редактирования
+        onBlur, // Событие, которое вызывается при потере фокуса инпутом
+        onEnter, // Событие, которое вызывается при нажатии Enter в инпуте
+        spanProps, // Дополнительные пропсы для спана
 
         ...restProps // Все остальные пропсы попадут в объект restProps
     }
 ) => {
-    const [editMode, setEditMode] = useState<boolean>(false)  // Локальное состояние для включения/выключения режима редактирования
-
-    const {children, onDoubleClick, className, defaultText, ...restSpanProps} =
-    spanProps || {}
+    const [editMode, setEditMode] = useState<boolean>(false) // Локальное состояние для управления режимом редактирования
+    const { children, onDoubleClick, className, defaultText, ...restSpanProps } = spanProps || {}
 
     const onEnterCallback = () => {
         // Выключить editMode при нажатии Enter
-        setEditMode(false)
-        onEnter?.() // Вызов функции onEnter, если она передана
+        setEditMode(false) // Переключаемся из режима редактирования
+        onEnter?.() // Если передан onEnter пропс, вызываем его
     }
-    
     const onBlurCallback = (e: React.FocusEvent<HTMLInputElement>) => {
-        // Выключить editMode при потере фокуса
-        setEditMode(false)
-        onBlur?.(e) // Вызов функции onBlur, если она передана
+        // Выключить editMode при нажатии за пределами инпута
+        setEditMode(false) // Переключаемся из режима редактирования
+        onBlur?.(e) // Если передан onBlur пропс, вызываем его
     }
-    
     const onDoubleClickCallBack = (
         e: React.MouseEvent<HTMLSpanElement, MouseEvent>
     ) => {
         // Включить editMode при двойном клике
-        setEditMode(true)
-        onDoubleClick?.(e) // Вызов функции onDoubleClick, если она передана
+        setEditMode(true) // Включаем режим редактирования
+        onDoubleClick?.(e) // Если передан onDoubleClick пропс, вызываем его
     }
 
-    const spanClassName = s.span
-        + (className ? ' ' + className : '') // Добавление переданного className
+    const spanClassName = s.span + (className ? ' ' + className : '')
 
     return (
         <>
-            {editMode ? (  // Если editMode включен, показываем инпут
+            {editMode ? (
                 <SuperInputText
-                    autoFocus={autoFocus || true}  // Включаем автофокус
-                    onBlur={onBlurCallback}  // Обработчик потери фокуса
-                    onEnter={onEnterCallback}  // Обработчик нажатия Enter
-                    className={s.input}  // Стили для инпута
-                    {...restProps} // Отдаём инпуту остальные пропсы если они есть (value например там внутри)
+                    autoFocus={autoFocus || true} // Автофокус на инпуте
+                    onBlur={onBlurCallback} // Обработчик потери фокуса
+                    onEnter={onEnterCallback} // Обработчик нажатия Enter
+                    className={s.input} // Стили для инпута
+                    {...restProps} // Отдаём инпуту остальные пропсы, если они есть (value например там внутри)
                 />
             ) : (
-                <div className={s.spanBlock}>  // Если editMode выключен, показываем span
+                <div className={s.spanBlock}>
                     <img
-                        src={editIcon}  // Иконка для редактирования
+                        src={editIcon}
                         className={s.pen}
                         alt={'edit'}
                     />
                     <span
-                        onDoubleClick={onDoubleClickCallBack}  // Обработчик двойного клика
-                        className={spanClassName}  // Стили для спана
+                        onDoubleClick={onDoubleClickCallBack} // Двойной клик переключает в режим редактирования
+                        className={spanClassName} // Стили для спана
                         {...restSpanProps}
                     >
-                        {/* Если нет захардкодженного текста для спана, то показываем значение инпута */}
+                        {/* Если нет захардкодженного текста для спана, то значение инпута */}
                         {children || restProps.value || defaultText}
                     </span>
                 </div>

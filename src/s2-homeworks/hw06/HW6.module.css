@@ -1,10 +1,47 @@
 /* Контейнер для редактируемого спана */
 .editableSpanContainer {
     margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f7f7f7; /* Легкий серый фон */
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Легкая тень для контейнера */
 }
 
 /* Контейнер для кнопок */
 .buttonsContainer {
     display: flex;
     gap: 10px;
+}
+
+/* Кнопки */
+button {
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+/* Основная кнопка */
+#hw6-save {
+    background-color: #0080FF;
+    color: white;
+    border: none;
+}
+
+/* Альтернативная кнопка */
+#hw6-restore {
+    background-color: #f0f0f0;
+    color: #333;
+    border: 1px solid #ccc;
+}
+
+/* Эффект при наведении на кнопки */
+button:hover {
+    background-color: #005bb5;
+    color: white;
+}
+
+/* Эффект при наведении на альтернативную кнопку */
+#hw6-restore:hover {
+    background-color: #e0e0e0;
 }

@@ -21,7 +21,7 @@ const HW6 = () => {
 
     const restore = () => {
         // Восстановление значения из localStorage под ключом 'hw6-editable-span-value'
-        const restoredValue = restoreState<string>('hw6-editable-span-value', '')  // Восстанавливаем значение, если нет значения в localStorage, возвращаем пустую строку
+        const restoredValue = restoreState<string>('hw6-editable-span-value', '')  // Если нет значения в localStorage, возвращаем пустую строку
         setValue(restoredValue)  // Устанавливаем восстановленное значение в состояние
     }
 

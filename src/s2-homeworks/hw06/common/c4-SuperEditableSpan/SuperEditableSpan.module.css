@@ -1,20 +1,20 @@
-/* Стили для блока, содержащего span и иконку */
+/* Контейнер для блока, содержащего span и иконку */
 .spanBlock {
     display: flex;
     align-items: center;
     cursor: pointer;
 }
 
-/* Стили для спана, который будет редактируемым */
+/* Стили для редактируемого спана */
 .span {
     font-size: 16px;
     color: #333;
-    padding: 5px;
+    padding: 5px 0;
     border-bottom: 1px dashed #ccc;
     transition: border-bottom-color 0.3s;
 }
 
-/* Стили для спана в режиме редактирования */
+/* Эффект при наведении на спан */
 .span:hover {
     border-bottom-color: #0080FF; /* Меняем цвет на синий при наведении */
 }
@@ -22,16 +22,24 @@
 /* Стили для инпута, который появляется в режиме редактирования */
 .input {
     font-size: 16px;
-    padding: 5px;
-    border: 1px solid #ccc;
+    padding: 8px 12px;
+    border: 1px solid #0080FF; /* Синяя граница при редактировании */
     border-radius: 4px;
     outline: none;
     width: 100%;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1); /* Легкая тень для инпута */
 }
 
-/* Стили для иконки карандаша */
+/* Стили для иконки редактирования (карандаш) */
 .pen {
     margin-right: 10px;
     width: 20px;
     height: 20px;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+}
+
+/* Эффект при наведении на иконку */
+.pen:hover {
+    opacity: 1;
 }
