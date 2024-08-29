@@ -1,25 +1,57 @@
 .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: #37474f;
+    transition: left 0.3s ease;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
 }
 
 .sidebar.open {
+    left: 0;
 }
 
 .background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
 }
 
 .nav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .nav a {
-}
-
-.nav a:hover {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
 }
 
 .nav a.active {
+    font-weight: bold;
+    color: #ffeb3b; /* Цвет активной ссылки */
 }
+
 .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .close img {
+    width: 24px;
+    height: 24px;
 }
