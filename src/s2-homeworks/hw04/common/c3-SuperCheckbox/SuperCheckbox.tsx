@@ -1,53 +1,35 @@
-import React, { ChangeEvent, DetailedHTMLProps, InputHTMLAttributes } from 'react';
+import React, { ChangeEvent } from 'react';
 import s from './SuperCheckbox.module.css';
 
-// тип пропсов обычного инпута
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-
-// Дополнительные пропсы для SuperCheckbox
-type SuperCheckboxPropsType = Omit<DefaultInputPropsType, 'type'> & {
-  onChangeChecked?: (checked: boolean) => void;
-  spanClassName?: string;
+// Типы пропсов для компонента SuperCheckbox
+type SuperCheckboxPropsType = {
+  id?: string;
+  checked: boolean;
+  onChangeChecked: (checked: boolean) => void;
+  children?: React.ReactNode;
 };
 
-// Компонент SuperCheckbox
-const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
-  onChange,
-  onChangeChecked,
-  className,
-  spanClassName,
-  children, // текст внутри чекбокса
-  id,
-  checked, // добавляем checked
-  ...restProps // остальные пропсы
-}) => {
+const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
+  {
+    id, checked, onChangeChecked, children,
+  }
+) => {
   // Обработчик изменения состояния чекбокса
   const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    onChange?.(e); // вызов внешнего onChange, если он есть
-    onChangeChecked?.(e.currentTarget.checked); // вызов внешнего onChangeChecked, если он есть
+    onChangeChecked(e.currentTarget.checked);
   };
 
-  // Классы для чекбокса
-  const finalInputClassName = s.checkbox + (className ? ' ' + className : '');
-
   return (
-    <label className={s.label}>
+    <label className={s.checkbox}>
       <input
         id={id}
         type={'checkbox'}
-        checked={checked} // добавляем checked
+        checked={checked}
         onChange={onChangeCallback}
-        className={finalInputClassName}
-        {...restProps} // передача остальных пропсов в input
       />
-      {children && (
-        <span id={id ? id + '-span' : undefined} className={spanClassName}>
-          {children}
-        </span>
-      )}
+      {children && <span>{children}</span>}
     </label>
   );
-}
+};
 
 export default SuperCheckbox;
-
