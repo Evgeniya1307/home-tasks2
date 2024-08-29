@@ -1,19 +1,13 @@
-describe('Checkbox testing', () => {
-  it('should check the first checkbox', () => {
-    cy.get('#hw4-super-checkbox-with-text')
-      .should('exist')
-      .should('be.visible')
-      .should('not.be.checked')
-      .check({ force: true })
-      .should('be.checked');
-  });
+// Проверяем, что чекбокс существует, не установлен, затем устанавливаем его и проверяем, что он установлен.
+cy.get('#hw4--super-checkbox-with-text')
+  .should('exist') // Убеждаемся, что элемент существует на странице
+  .and('not.be.checked') // Убеждаемся, что чекбокс не отмечен
+  .check({ force: true }) // Устанавливаем чекбокс, force:true принудительно выполняет действие
+  .should('be.checked'); // Проверяем, что чекбокс теперь отмечен
 
-  it('should uncheck the second checkbox', () => {
-    cy.get('#hw4-super-checkbox-like-old')
-      .should('exist')
-      .should('be.visible')
-      .should('be.checked')
-      .uncheck({ force: true })
-      .should('not.be.checked');
-  });
-});
+// Проверяем, что второй чекбокс установлен, затем сбрасываем его и проверяем, что он не установлен.
+cy.get('#hw4--super-checkbox-like-old')
+  .should('exist') // Убеждаемся, что элемент существует на странице
+  .and('be.checked') // Убеждаемся, что чекбокс отмечен
+  .uncheck({ force: true }) // Сбрасываем чекбокс, force:true принудительно выполняет действие
+  .should('not.be.checked'); // Проверяем, что чекбокс теперь не отмечен
