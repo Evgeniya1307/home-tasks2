@@ -1,31 +1,42 @@
 import React, { ChangeEvent } from 'react';
 import s from './SuperCheckbox.module.css';
 
-// Типы пропсов для компонента SuperCheckbox
 type SuperCheckboxPropsType = {
   id?: string;
-  checked: boolean;
-  onChangeChecked: (checked: boolean) => void;
+  checked?: boolean;
+  onChangeChecked?: (checked: boolean) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   children?: React.ReactNode;
 };
 
-const SuperCheckbox: React.FC<SuperCheckboxPropsType> = (
-  {
-    id, checked, onChangeChecked, children,
-  }
-) => {
-  // Обработчик изменения состояния чекбокса
+const SuperCheckbox: React.FC<SuperCheckboxPropsType> = ({
+  id,
+  checked,
+  onChangeChecked,
+  onChange,
+  children,
+  ...restProps
+}) => {
   const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-    onChangeChecked(e.currentTarget.checked);
+    if (onChangeChecked) {
+      onChangeChecked(e.currentTarget.checked); // передаем новое состояние (checked)
+    }
+    if (onChange) {
+      onChange(e); // если передан onChange, вызываем его
+    }
   };
 
+  const finalInputClassName = s.checkbox;
+
   return (
-    <label className={s.checkbox}>
+    <label>
       <input
         id={id}
-        type={'checkbox'}
+        type="checkbox"
         checked={checked}
         onChange={onChangeCallback}
+        className={finalInputClassName}
+        {...restProps} // остальные пропсы если есть
       />
       {children && <span>{children}</span>}
     </label>
