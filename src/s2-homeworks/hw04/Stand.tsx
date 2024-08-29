@@ -14,8 +14,8 @@ const Stand = () => {
   };
 
   const handleSecondCheckboxChange = (isChecked: boolean) => {
-    setChecked(!isChecked);
-    console.log('Second Checkbox:', !isChecked);
+    setChecked(isChecked);
+    console.log('Second Checkbox:', isChecked);
   };
 
   return (
@@ -46,7 +46,7 @@ const Stand = () => {
         </SuperCheckbox>
         <SuperCheckbox
           id='hw4-super-checkbox-like-old'
-          checked={checked}  // Изменим проверку на использование `checked`
+          checked={checked}
           onChangeChecked={handleSecondCheckboxChange}
         >
           Some other text
