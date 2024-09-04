@@ -2,18 +2,18 @@ import React, {
     SelectHTMLAttributes,
     DetailedHTMLProps,
     ChangeEvent,
-} from 'react'
-import s from './SuperSelect.module.css'
+} from 'react';
+import s from './SuperSelect.module.css';
 
 type DefaultSelectPropsType = DetailedHTMLProps<
     SelectHTMLAttributes<HTMLSelectElement>,
     HTMLSelectElement
->
+>;
 
 type SuperSelectPropsType = DefaultSelectPropsType & {
-    options?: any[]
-    onChangeOption?: (option: any) => void
-}
+    options?: any[]; //Массив вариантов для отображения
+    onChangeOption?: (option: any) => void; // Функция, вызываемая при изменении значения
+};
 
 const SuperSelect: React.FC<SuperSelectPropsType> = ({
     options,
@@ -33,23 +33,25 @@ const SuperSelect: React.FC<SuperSelectPropsType> = ({
                   {o.value}
               </option>
           ))
-        : [] // map options with key
+        : []; // Параметры отображения из реквизитов
 
+    // Функция для обработки выбранного изменения ввода
     const onChangeCallback = (e: ChangeEvent<HTMLSelectElement>) => {
-        // делают студенты
-    }
+        const selectedValue = Number(e.target.value); //Получить выбранное значение из события
+        onChangeOption && onChangeOption(selectedValue); // Вызовите предоставленный обработчик с выбранным значением
+    };
 
-    const finalSelectClassName = s.select + (className ? ' ' + className : '')
+    const finalSelectClassName = s.select + (className ? ' ' + className : '');
 
     return (
         <select
             className={finalSelectClassName}
-            onChange={onChangeCallback}
+            onChange={onChangeCallback} // Присоединение обратного вызова onChange
             {...restProps}
         >
             {mappedOptions}
         </select>
-    )
-}
+    );
+};
 
-export default SuperSelect
+export default SuperSelect;

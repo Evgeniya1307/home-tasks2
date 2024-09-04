@@ -1,15 +1,31 @@
+/* Стили для радио-кнопок */
 .radio {
+    margin-right: 10px;
 }
 
 .radio::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid #007bff;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 5px;
 }
-
 
 .radio:checked::before {
+    background-color: #007bff;
 }
 
+/* Стили для лейблов */
 .label {
+    font-size: 14px;
+    margin-right: 15px;
 }
 
+/* Контейнер для всех опций */
 .options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
