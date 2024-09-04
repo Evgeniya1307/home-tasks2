@@ -17,7 +17,6 @@ const arr = [
     { id: 2, value: 'y' },
     { id: 3, value: 'z' },
 ];
-
 const HW7 = () => {
     const [value, onChangeOption] = useState(1); // Управление состоянием для селекта и радио
 
