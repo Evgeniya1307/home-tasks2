@@ -1,9 +1,4 @@
-import React, {
-    ChangeEvent,
-    InputHTMLAttributes,
-    DetailedHTMLProps,
-    HTMLAttributes,
-} from 'react';
+import React, { ChangeEvent, InputHTMLAttributes, DetailedHTMLProps, HTMLAttributes } from 'react';
 import s from './SuperRadio.module.css';
 
 // Типизация стандартных свойств для input
@@ -11,6 +6,7 @@ type DefaultRadioPropsType = DetailedHTMLProps<
     InputHTMLAttributes<HTMLInputElement>,
     HTMLInputElement
 >;
+
 // Типизация для дополнительных свойств span
 type DefaultSpanPropsType = DetailedHTMLProps<
     HTMLAttributes<HTMLSpanElement>,
@@ -21,7 +17,6 @@ type DefaultSpanPropsType = DetailedHTMLProps<
 type SuperRadioPropsType = Omit<DefaultRadioPropsType, 'type'> & {
     options?: any[]; // Массив опций для отображения радиокнопок
     onChangeOption?: (option: any) => void; // Функция, вызываемая при выборе опции
-
     spanProps?: DefaultSpanPropsType; // Дополнительные пропсы для span
 };
 
@@ -65,7 +60,7 @@ const SuperRadio: React.FC<SuperRadioPropsType> = ({
                       {...spanProps}
                       className={spanClassName}
                   >
-                      {o.value} {/* Отображаем текст опции */}
+                      {o.value.trim()} {/* Удаляем лишние пробелы здесь */}
                   </span>
               </label>
           ))

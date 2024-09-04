@@ -1,8 +1,4 @@
-import React, {
-    SelectHTMLAttributes,
-    DetailedHTMLProps,
-    ChangeEvent,
-} from 'react';
+import React, { SelectHTMLAttributes, DetailedHTMLProps, ChangeEvent } from 'react';
 import s from './SuperSelect.module.css';
 
 type DefaultSelectPropsType = DetailedHTMLProps<
@@ -11,7 +7,7 @@ type DefaultSelectPropsType = DetailedHTMLProps<
 >;
 
 type SuperSelectPropsType = DefaultSelectPropsType & {
-    options?: any[]; //Массив вариантов для отображения
+    options?: any[]; // Массив вариантов для отображения
     onChangeOption?: (option: any) => void; // Функция, вызываемая при изменении значения
 };
 
@@ -22,6 +18,7 @@ const SuperSelect: React.FC<SuperSelectPropsType> = ({
     onChangeOption,
     ...restProps
 }) => {
+    // Мапим опции для селекта
     const mappedOptions: any[] = options
         ? options.map((o) => (
               <option
@@ -30,14 +27,14 @@ const SuperSelect: React.FC<SuperSelectPropsType> = ({
                   key={o.id}
                   value={o.id}
               >
-                  {o.value}
+                  {o.value.trim()} {/* Удаляем пробелы */}
               </option>
           ))
-        : []; // Параметры отображения из реквизитов
+        : [];
 
-    // Функция для обработки выбранного изменения ввода
+    // Обработчик изменения выбранной опции
     const onChangeCallback = (e: ChangeEvent<HTMLSelectElement>) => {
-        const selectedValue = Number(e.target.value); //Получить выбранное значение из события
+        const selectedValue = Number(e.target.value); // Получить выбранное значение из события
         onChangeOption && onChangeOption(selectedValue); // Вызовите предоставленный обработчик с выбранным значением
     };
 
