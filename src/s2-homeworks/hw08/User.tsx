@@ -1,25 +1,26 @@
-import React from 'react'
-import { UserType } from './HW8'
-import s from './HW8.module.css'
+import React from 'react';
+import { UserType } from './HW8';
+import s from './HW8.module.css';
 
-// types
+// Компонент для отображения одного пользователя в строке таблицы
 type UserPropsType = {
-    u: UserType
-}
+    u: UserType;
+};
 
 const User: React.FC<UserPropsType> = ({ u }) => {
     return (
         <tr id={'hw8-user-' + u._id + '-' + u.age} className={s.item}>
+            {/* Отображаем имя пользователя */}
             <td id={'hw8-user-name-' + u._id} className={s.nameCol}>
-                {/*отобразить имя*/}
-
+                {u.name}
             </td>
-            <td id={'hw8-user-age-' + u._id}>
-                {/*отобразить возраст*/}
 
+            {/* Отображаем возраст пользователя */}
+            <td id={'hw8-user-age-' + u._id} className={s.ageCol}>
+                {u.age}
             </td>
         </tr>
-    )
-}
+    );
+};
 
-export default User
+export default User;

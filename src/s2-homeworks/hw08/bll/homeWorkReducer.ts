@@ -1,20 +1,28 @@
-import {UserType} from '../HW8'
+import { UserType } from '../HW8';
 
 type ActionType =
     | { type: 'sort'; payload: 'up' | 'down' }
-    | { type: 'check'; payload: number }
+    | { type: 'check'; payload: number };
 
-export const homeWorkReducer = (state: any, action: any): any => { // need to fix any
+// Редьюсер для обработки действий сортировки и фильтрации
+export const homeWorkReducer = (state: UserType[], action: ActionType): UserType[] => {
     switch (action.type) {
-        case 'sort': { // by name
-
-            return state // need to fix
+        case 'sort': {
+            // Сортируем пользователей по имени
+            const sortedState = [...state].sort((a, b) => {
+                if (action.payload === 'up') {
+                    return a.name > b.name ? 1 : -1;
+                } else {
+                    return a.name < b.name ? 1 : -1;
+                }
+            });
+            return sortedState;
         }
         case 'check': {
-
-            return state // need to fix
+            // Фильтрация пользователей по возрасту 18 и старше
+            return state.filter(u => u.age >= action.payload);
         }
         default:
-            return state
+            return state;
     }
-}
+};

@@ -1,64 +1,59 @@
-import React, {useState} from 'react'
-import {homeWorkReducer} from './bll/homeWorkReducer'
-import s from './HW8.module.css'
-import s2 from '../../s1-main/App.module.css'
-import SuperButton from '../hw04/common/c2-SuperButton/SuperButton'
-import User from './User'
+import React, { useState } from 'react';
+import { homeWorkReducer } from './bll/homeWorkReducer';
+import s from './HW8.module.css';
+import s2 from '../../s1-main/App.module.css';
+import SuperButton from '../hw04/common/c2-SuperButton/SuperButton';
+import User from './User';
 
-/*
-* 1 - дописать типы и логику (сортировка по имени, фильтрация по совершеннолетию) homeWorkReducer, проверить тестом
-* 2 - дописать компоненту User
-* 3 - сделать стили в соответствии с дизайном
-* */
-
+// Определяем тип пользователя
 export type UserType = {
-    _id: number
-    name: string
-    age: number
-}
+    _id: number;
+    name: string;
+    age: number;
+};
 
+// Начальный список пользователей
 const initialPeople: UserType[] = [
-    // студенты могут поменять имя/возраст/количество объектов, _id должны быть целочисленные
-    {_id: 0, name: 'Кот', age: 3},
-    {_id: 1, name: 'Александр', age: 66},
-    {_id: 2, name: 'Коля', age: 16},
-    {_id: 3, name: 'Виктор', age: 44},
-    {_id: 4, name: 'Дмитрий', age: 40},
-    {_id: 5, name: 'Ирина', age: 55},
-]
+    { _id: 0, name: 'Кот', age: 3 },
+    { _id: 1, name: 'Александр', age: 66 },
+    { _id: 2, name: 'Коля', age: 16 },
+    { _id: 3, name: 'Виктор', age: 44 },
+    { _id: 4, name: 'Дмитрий', age: 40 },
+    { _id: 5, name: 'Ирина', age: 55 },
+];
 
 const HW8 = () => {
-    const [people, setPeople] = useState<UserType[]>(initialPeople)
-    const [currentSort, setCurrentSort] = useState('')
+    const [people, setPeople] = useState<UserType[]>(initialPeople); // Локальное состояние для списка пользователей
+    const [currentSort, setCurrentSort] = useState(''); // Текущее состояние сортировки (up, down, 18+)
 
-    const finalPeople = people.map((u: UserType) => <User key={u._id} u={u}/>)
+    // Функция для отображения списка пользователей
+    const finalPeople = people.map((u: UserType) => <User key={u._id} u={u} />);
 
+    // Сортировка имен в алфавитном порядке
     const sortUp = () => {
-        setPeople(
-            homeWorkReducer(initialPeople, {type: 'sort', payload: 'up'})
-        ) // в алфавитном порядке a.name > b.name
-        setCurrentSort('up')
-    }
+        setPeople(homeWorkReducer(initialPeople, { type: 'sort', payload: 'up' }));
+        setCurrentSort('up'); // Обновляем состояние сортировки
+    };
 
+    // Сортировка имен в обратном порядке
     const sortDown = () => {
-        setPeople(
-            homeWorkReducer(initialPeople, {type: 'sort', payload: 'down'})
-        ) // в обратном порядке a.name < b.name}
-        setCurrentSort('down')
-    }
+        setPeople(homeWorkReducer(initialPeople, { type: 'sort', payload: 'down' }));
+        setCurrentSort('down');
+    };
+
+    // Фильтрация пользователей по возрасту 18+
     const check18 = () => {
-        setPeople(
-            homeWorkReducer(initialPeople, {type: 'check', payload: 18})
-        ) // совершеннолетние
-        setCurrentSort('18')
-    }
+        setPeople(homeWorkReducer(initialPeople, { type: 'check', payload: 18 }));
+        setCurrentSort('18');
+    };
 
     return (
-        <div id={'hw3'}>
-            <div className={s2.hwTitle}>Homework #8</div>
+        <div id={'hw8'}>
+            <div className={s2.hwTitle}>Домашнее задание #8</div>
             <div className={s2.hw}>
                 <div className={s.container}>
                     <div className={s.buttonsContainer}>
+                        {/* Кнопки для сортировки/фильтрации */}
                         <SuperButton
                             id={'hw8-button-up'}
                             onClick={sortUp}
@@ -82,12 +77,13 @@ const HW8 = () => {
                         </SuperButton>
                     </div>
 
+                    {/* Таблица для отображения пользователей */}
                     <table id={'hw8-users'} className={s.users}>
                         <thead className={s.thead}>
-                        <tr>
-                            <td className={s.nameCol}>Name</td>
-                            <td className={s.ageCol}>Age</td>
-                        </tr>
+                            <tr>
+                                <td className={s.nameCol}>Имя</td>
+                                <td className={s.ageCol}>Возраст</td>
+                            </tr>
                         </thead>
 
                         <tbody>{finalPeople}</tbody>
@@ -95,7 +91,7 @@ const HW8 = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default HW8
+export default HW8;
